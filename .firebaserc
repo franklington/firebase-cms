@@ -1,7 +1,5 @@
 {
   "projects": {
-    "default": "fir-cms-76f54",
-    "cm": "fir-cms-76f54",
-    "cms": "fir-cms-76f54"
+    "default": "cinema-online-booking"
   }
 }
