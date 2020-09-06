@@ -4,7 +4,7 @@ import { Title, Meta } from '@angular/platform-browser';
 import { MdSnackBar } from '@angular/material';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { GlobalService } from 'app/services/global.service';
 import { LocalCartService } from 'app/services/localcart.service';
 

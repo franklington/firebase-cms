@@ -8,7 +8,6 @@ import { MaterialComponentsModule } from 'app/materialcomponents.module';
 import { SharedModule } from 'app/shared.module';
 
 import { CKEditorModule } from 'ng2-ckeditor';
-import { DndModule } from 'ng2-dnd';
 
 import { AdminComponent } from 'app/admin/admin-components/admin/admin.component';
 import { AddPostComponent } from 'app/admin/admin-components/add-post/add-post.component';
@@ -45,8 +44,7 @@ import { AdminRoutingModule } from './admin-routing.module';
     FormsModule,
     MaterialComponentsModule,
     SharedModule,
-    CKEditorModule,
-    DndModule.forRoot(),
+    CKEditorModule
   ],
   declarations: [
     AddAdminComponent,
