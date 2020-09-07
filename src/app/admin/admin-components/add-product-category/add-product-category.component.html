@@ -5,23 +5,21 @@
         Category
     </h2>
 
-    <md-toolbar class="highlight small" *ngIf="awaitingApproval" routerLink="/admin/approvals">
+    <mat-toolbar class="highlight small" *ngIf="awaitingApproval" routerLink="/admin/approvals">
         This product has a change awaiting moderation
         <div class="action">
             View Approvals
         </div>
-    </md-toolbar>
+    </mat-toolbar>
 
-    <md-input-container class="block">
-        <input mdInput placeholder="Category name" type="text" [(ngModel)]="newName">
-    </md-input-container>
+    <mat-label>Standard form field</mat-label>
+        <input matInput placeholder="Category name" type="text" [(ngModel)]="newName">
 
-    <md-input-container>
-        <input mdInput placeholder="Category weight" type="number" [(ngModel)]="newWeight">
-    </md-input-container>
+        <mat-label>Standard form field</mat-label>
+        <input matInput placeholder="Category weight" type="number" [(ngModel)]="newWeight">
 
     <button
-        md-raised-button
+        mat-raised-button
         (click)="approveItem(newName, newWeight)"
         class="submit"
         *ngIf="router.url.includes('approval') && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
@@ -29,7 +27,7 @@
     </button>
 
     <button
-        md-raised-button
+        mat-raised-button
         (click)="submitForModeration(newName, newWeight)"
         class="submit"
         *ngIf="router.url.includes('approval') && entityObject && ((currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || currentAdmin.uid === entityObject.updatedBy)">
@@ -37,7 +35,7 @@
     </button>
 
     <button
-        md-raised-button
+        mat-raised-button
         (click)="deleteItem($event)"
         class="submit"
         *ngIf="router.url.includes('approval') && entityObject && ((currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || currentAdmin.uid === entityObject.updatedBy)">
@@ -45,7 +43,7 @@
     </button>
 
     <button
-        md-raised-button
+        mat-raised-button
         (click)="submitForModeration(newName, newWeight)"
         class="submit"
         *ngIf="!router.url.includes('approval')">
@@ -53,7 +51,7 @@
     </button>
 
     <button
-        md-raised-button
+        mat-raised-button
         (click)="addCategory(newName, newWeight)"
         class="submit"
         *ngIf="!router.url.includes('approval') && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">

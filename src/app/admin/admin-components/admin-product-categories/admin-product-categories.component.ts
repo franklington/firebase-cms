@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Router }    from '@angular/router';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { GlobalService } from 'app/services/global.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-product-categories',
@@ -14,15 +15,15 @@ import { Observable } from 'rxjs/Observable';
 export class AdminProductCategoriesComponent implements OnInit {
 
   categories: Observable<any>;
-  dialogRef: MdDialogRef<any>;
+  dialogRef: MatDialogRef<any>;
   selectedOption: any;
   currentAdmin: any;
 
   constructor(
     public db: AngularFireDatabase,
     public router: Router,
-    public dialog: MdDialog,
-    public snackBar: MdSnackBar,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar,
     public globalService: GlobalService
   ) {
     this.categories = db.list('/categories').snapshotChanges();

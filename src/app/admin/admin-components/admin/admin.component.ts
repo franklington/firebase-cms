@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs';
 import { Router }    from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { GlobalService } from 'app/services/global.service';
 
 @Component({
@@ -23,7 +24,7 @@ export class AdminComponent implements OnInit {
     public afAuth: AngularFireAuth,
     public router: Router,
     public globalService: GlobalService,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
   ) {
     this.user = afAuth.authState;
     this.currentAdmin = {};
@@ -31,10 +32,14 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     this.user.subscribe(currentUser => {
+
       if (!currentUser) {
         this.router.navigateByUrl('login');
       } else {
-        this.db.object('/admins/' + this.globalService.hashCode(currentUser.email)).valueChanges().subscribe((a:any) => {
+        console.log("changed from hash method");
+
+        //this.db.object('/admins/' + this.globalService.hashCode(currentUser.email)).valueChanges().subscribe((a:any) => {
+        this.db.object('/admins/' + currentUser.uid).valueChanges().subscribe((a:any) => {
           if (a && a.email) {
             this.globalService.admin.next(currentUser);
             this.db.object('/admins/' + currentUser.uid).valueChanges().subscribe((a:any) => {

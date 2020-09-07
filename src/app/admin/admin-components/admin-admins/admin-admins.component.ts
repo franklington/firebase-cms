@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 
 @Component({
@@ -13,10 +15,10 @@ export class AdminAdminsComponent {
 
   admins: Observable<any>;
   selectedOption: any;
-  dialogRef: MdDialogRef<any>;
+  dialogRef: MatDialogRef<any>;
   adminsObject: any;
 
-  constructor(public db: AngularFireDatabase, public dialog: MdDialog, public snackBar: MdSnackBar) {
+  constructor(public db: AngularFireDatabase, public dialog: MatDialog, public snackBar: MatSnackBar) {
     this.admins = db.list('/admins', ref => ref.orderByChild('email').limitToFirst(9999)).snapshotChanges();
 
     this.admins.subscribe((adminList:any) => {

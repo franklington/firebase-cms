@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { GlobalService } from 'app/services/global.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'add-admin',
@@ -20,7 +20,7 @@ export class AddAdminComponent implements OnInit {
 
   constructor(
     public db: AngularFireDatabase,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public router: Router,
     public route: ActivatedRoute,
     public globalService: GlobalService

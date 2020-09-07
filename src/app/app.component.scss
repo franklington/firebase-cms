@@ -14,7 +14,7 @@
         }
     }
 
-    md-icon {
+    mat-icon {
         cursor: pointer;
         display: inline-block;
 
@@ -53,7 +53,7 @@
                 margin-right: 0;
             }
 
-            md-icon {
+            mat-icon {
                 display:  inline-block;
                 transform: translateY(7px);
             }
@@ -83,6 +83,10 @@
     &:hover {
         transform: scale(1.1);
     }
+}
+.mat-main-container{
+  margin-top:65px;
+  //height: 100vh;
 }
 
 .mobile-nav {

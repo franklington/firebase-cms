@@ -4,8 +4,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { MdSnackBar } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 import { GlobalService } from 'app/services/global.service';
 import { LocalCartService } from 'app/services/localcart.service';
 
@@ -25,7 +25,7 @@ export class ProductComponent implements OnInit {
   constructor(
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public route: ActivatedRoute,
     public router: Router,
     public globalService: GlobalService,
@@ -39,9 +39,13 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
+
         this.productContent = this.db.list('/products', ref => ref.orderByChild('url').equalTo(params.url));
         this.productContent.valueChanges().subscribe(p => {
+          console.log(p);
+
           if (p[0].published) {
+
             this.product = p[0];
             this.setJsonldData();
 

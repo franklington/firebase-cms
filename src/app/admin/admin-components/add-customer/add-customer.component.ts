@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { MdSnackBar } from '@angular/material';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
@@ -19,7 +20,7 @@ export class AddCustomerComponent implements OnInit {
 
   constructor(
     public db: AngularFireDatabase,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public router: Router,
     public route: ActivatedRoute
   ) {
@@ -64,4 +65,3 @@ export class AddCustomerComponent implements OnInit {
     });
   }
 }
-

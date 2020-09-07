@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { GlobalService } from 'app/services/global.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'admin-dashboard',
@@ -30,7 +30,7 @@ export class AdminDashboardComponent implements OnInit {
     this.products = db.list('/products').valueChanges();
     this.categories = db.list('/categories').valueChanges();
     this.orders = db.list('/orders').valueChanges();
-    this.approvals = db.object('/approvals').valueChanges();
+    this.approvals = db.list('/approvals').valueChanges();
 
     this.posts.subscribe
 

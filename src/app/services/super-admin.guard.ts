@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { GlobalService } from '../services/global.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class SuperAdminGuard implements CanActivate {
@@ -18,6 +18,8 @@ export class SuperAdminGuard implements CanActivate {
 
   canActivate(): Promise<boolean> {
     return new Promise(Resolve => {
+      console.log("superuser check");
+
       if (this.currentUser) {
         this.db.list('/admins', ref => ref.orderByChild('email').equalTo(this.currentUser.email)).valueChanges()
           .subscribe((u:any) => {

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { GlobalService } from '../../services/global.service';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from '../../../environments/environment';
 import { Title, Meta } from '@angular/platform-browser';
 import * as firebase from 'firebase/app';
@@ -28,7 +28,7 @@ export class CheckoutPaymentComponent implements OnInit {
     public afAuth: AngularFireAuth,
     public globalService: GlobalService,
     public router: Router,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     private title: Title,
     private meta: Meta
   ) {
@@ -97,7 +97,7 @@ export class CheckoutPaymentComponent implements OnInit {
     } else {
       let snackBarRef = this.snackBar.open('You must complete the form', 'OK!', {
         duration: 3000,
-        extraClasses: ['warn-snackbar']
+        panelClass: ['warn-snackbar']
       });
     }
   }

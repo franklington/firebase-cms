@@ -9,10 +9,9 @@
     <p itemprop="price">{{product.price | currency:'USD':true}}</p>
     <p [innerHTML]="product.description | safeHtml" itemprop="description"></p>
     <div class="quantity-label">Qty</div>
-    <md-input-container class="quantity">
-      <input mdInput type="number" min="1" [(ngModel)]="product.quantity">
-    </md-input-container>
-    <button md-raised-button (click)="addToCart(product)">
+    <mat-label>Standard form field</mat-label>
+      <input matInput type="number" min="1" [(ngModel)]="product.quantity">
+    <button mat-raised-button (click)="addToCart(product)">
       <span *ngIf="!globalCart || !globalCart[product.entityKey]">Add to</span>
       <span *ngIf="globalCart && globalCart[product.entityKey]">Update</span>
        Cart

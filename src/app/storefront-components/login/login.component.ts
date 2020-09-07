@@ -6,7 +6,10 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { GlobalService } from '../../services/global.service';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { take } from 'rxjs/operators';
+
+
 
 @Component({
   selector: 'login',
@@ -25,7 +28,7 @@ export class LoginComponent implements OnInit {
     public afAuth: AngularFireAuth,
     public globalService: GlobalService,
     public router: Router,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     private title: Title,
     private meta: Meta
   ) {
@@ -41,7 +44,7 @@ export class LoginComponent implements OnInit {
     this.admin.subscribe(currentAdmin => {
 
       if (currentAdmin) {
-        db.object('/admins/' + this.globalService.hashCode(currentAdmin.email)).valueChanges().take(1).subscribe((admin:any) => {
+        db.object('/admins/' + this.globalService.hashCode(currentAdmin.email)).valueChanges().pipe(take(1)).subscribe((admin:any) => {
           if (admin && admin.role) {
             this.db.object('/admins/' + currentAdmin.uid).update({
               uid: currentAdmin.uid,

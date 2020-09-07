@@ -1,7 +1,9 @@
 import { Component, OnInit, Inject, Input} from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { GlobalService } from 'app/services/global.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as firebase from 'firebase/app';
@@ -31,19 +33,19 @@ export class AddPostComponent implements OnInit {
   currentPost: AngularFireObject<any>;
   currentModeratedPosts: AngularFireList<any>;
   entityObject: any;
-  dialogRef: MdDialogRef<any>;
+  dialogRef: MatDialogRef<any>;
   selectedOption: string;
   awaitingApproval: string;
 
   constructor(
     public af: FirebaseApp,
     public db: AngularFireDatabase,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public globalService: GlobalService,
     public router: Router,
     public route: ActivatedRoute,
     private fb: FirebaseApp,
-    public dialog: MdDialog
+    public dialog: MatDialog
   ) {
 
     this.newPublished = false;
@@ -216,7 +218,7 @@ export class AddPostComponent implements OnInit {
 
         let adminApprovalPosts = this.db.list('/approvals/posts/', ref => ref.orderByChild('updatedBy').equalTo(this.currentAdmin.uid)).valueChanges();
 
-        adminApprovalPosts.take(1).subscribe((approvals:any) => {
+        adminApprovalPosts.pipe(take(1)).subscribe((approvals:any) => {
           let matchingApprovals = [];
           if (this.router.url.includes('approval')) {
             matchingApprovals = approvals.filter((match) => {
@@ -298,4 +300,3 @@ export class AddPostComponent implements OnInit {
     }
   }
 }
-

@@ -17,7 +17,7 @@
 
 const functions = require('firebase-functions'),
       admin = require('firebase-admin'),
-      logging = require('@google-cloud/logging')();
+      logging = require('@google-cloud/logging');
 
 admin.initializeApp(functions.config().firebase);
 
@@ -29,13 +29,13 @@ const stripe = require('stripe')(functions.config().stripe.token),
 exports.createStripeCharge = functions.database.ref('/stripe_customers/{userId}/charges/{id}').onWrite(event => {
   const val = event.data.val();
   // This onWrite will trigger whenever anything is written to the path, so
-  // noop if the charge was deleted, errored out, or the Stripe API returned a result (id exists) 
+  // noop if the charge was deleted, errored out, or the Stripe API returned a result (id exists)
   if (val === null || val.id || val.error) return null;
   // Look up the Stripe customer id written in createStripeCustomer
   return admin.database().ref(`/stripe_customers/${event.params.userId}/customer_id`).once('value').then(snapshot => {
     return snapshot.val();
   }).then(customer => {
-    // Create a charge using the pushId as the idempotency key, protecting against double charges 
+    // Create a charge using the pushId as the idempotency key, protecting against double charges
     const amount = val.amount;
     const idempotency_key = event.params.id;
     let charge = {amount, currency, customer};

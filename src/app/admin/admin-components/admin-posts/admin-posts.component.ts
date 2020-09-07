@@ -4,9 +4,10 @@ import * as firebase from 'firebase/app';
 import { FirebaseApp } from 'angularfire2';
 import { GlobalService } from 'app/services/global.service';
 import { Router }    from '@angular/router';
-import { MdSnackBar, MdDialogRef, MdDialog } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'admin-posts',
@@ -18,7 +19,7 @@ export class AdminPostsComponent implements OnInit {
   posts: Observable<any>;
   post: AngularFireObject<any>;
   selectedOption: any;
-  dialogRef: MdDialogRef<any>;
+  dialogRef: MatDialogRef<any>;
   storageRef: any;
   currentAdmin: any;
 
@@ -27,8 +28,8 @@ export class AdminPostsComponent implements OnInit {
     public db: AngularFireDatabase,
     public globalService: GlobalService,
     public router: Router,
-    public dialog: MdDialog,
-    public snackBar: MdSnackBar
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
   ) {
     this.posts = db.list('/posts').snapshotChanges();
 

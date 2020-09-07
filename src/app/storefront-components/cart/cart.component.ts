@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router }    from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs';
@@ -25,7 +25,7 @@ export class CartComponent implements OnInit {
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
     public router: Router,
-    public snackBar: MdSnackBar,
+    public snackBar: MatSnackBar,
     public globalService: GlobalService,
     public localCart: LocalCartService,
     private title: Title,
