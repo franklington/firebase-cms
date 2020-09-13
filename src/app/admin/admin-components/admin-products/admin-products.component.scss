@@ -13,9 +13,10 @@
 
 .product {
     cursor: pointer;
-
+    display: flex;
     .content {
-        display: inline-block;
+
+
         width: calc(100% - 410px);
 
         h3 {

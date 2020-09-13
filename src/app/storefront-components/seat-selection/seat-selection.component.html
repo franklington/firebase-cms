@@ -1,0 +1,23 @@
+
+
+	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		 viewBox="0 0 400 800" style="enable-background:new 0 0 400 800;" xml:space="preserve"
+
+	   (click)="selectSeat($event.target)"
+		 #SeatingLayout>
+	<style id="SeatingStyle" type="text/css">
+
+		.seat{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
+		.seat:hover{fill:#333333;}
+	  .seat.reserved{fill:red;}
+		.seat.myreservation{fill:green;}
+		.seat.sold{fill:green;}
+		.seat.disabled{fill:green;}
+	</style>
+
+	<rect x="31.2" y="43.7" class="seat" width="52.5" height="52.5" id="S1R1S1"  seat="1" section="1" row="1"/>
+	<rect x="173.8" y="43.7" class="seat" width="52.5" height="52.5"id="S1R1S2" seat="3" section="1" row="1"/>
+	<rect x="102.5" y="43.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 257.4167 139.8333)" class="seat" width="52.5" height="52.5" id="S1R1S4" seat="2" section="1" row="1"/>
+	<rect x="245" y="43.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 542.5833 139.8333)" class="seat" width="52.5" height="52.5" id="S1R1S6" seat="4" section="1" row="1"/>
+	<rect x="316" y="43.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 684.5833 139.8333)" class="seat" width="52.5" height="52.5" id="S1R1S7" seat="5" section="1" row="1"/>
+	</svg>

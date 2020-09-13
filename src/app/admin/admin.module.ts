@@ -32,11 +32,13 @@ import { AddProductCategoryComponent } from 'app/admin/admin-components/add-prod
 import { AdminApprovalsComponent } from 'app/admin/admin-components/admin-approvals/admin-approvals.component';
 import { ApproveDialogComponent } from 'app/admin/admin-components/approve-dialog/approve-dialog.component';
 
+
 import { AuthGuard } from 'app/services/auth.guard';
 import { SuperAdminGuard } from 'app/services/super-admin.guard';
 import { AdminGuard } from 'app/services/admin.guard';
 
 import { AdminRoutingModule } from './admin-routing.module';
+import { AdminVenueComponent } from './admin-components/admin-venue/admin-venue.component';
 
 @NgModule({
   imports: [
@@ -69,6 +71,7 @@ import { AdminRoutingModule } from './admin-routing.module';
     AdminThemeComponent,
     DeleteDialogComponent,
     ApproveDialogComponent,
+    AdminVenueComponent,
   ],
   providers: [AuthGuard, SuperAdminGuard, AdminGuard],
   entryComponents: [DeleteDialogComponent, ApproveDialogComponent],

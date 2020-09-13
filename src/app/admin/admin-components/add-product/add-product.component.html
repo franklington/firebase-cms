@@ -27,6 +27,17 @@
     <mat-label>Standard form field</mat-label>
         <input matInput placeholder="Weight" [(ngModel)]="newWeight">
 
+
+
+      <mat-form-field>
+      <input matInput type="datetime-local" placeholder="start date" [(ngModel)]="newDate">
+    </mat-form-field>
+
+    <mat-select placeholder="Venue" [(ngModel)]="newVenue">
+        <mat-option value="">No venues</mat-option>
+      <!--  <mat-option *ngFor="let category of categories | async" [value]="category.key">{{ category.payload.val().name }}</mat-option>-->
+    </mat-select>
+
     <button mat-raised-button class="mat-upload-button" onclick="document.getElementById('uploadImage').click()">
         <span *ngIf="!newThumbnail">Upload</span>
         <span *ngIf="newThumbnail">Change</span>
@@ -36,6 +47,7 @@
     <img [src]="newThumbnail" *ngIf="newThumbnail" class="thumbnail">
     <div class="no-image" *ngIf="!newThumbnail">No image chosen</div>
     <div (click)="deleteImage()" *ngIf="newThumbnail" class="delete-image">Delete Image</div>
+
 
     <ckeditor
         [(ngModel)]="newDescription"
@@ -51,7 +63,7 @@
 
     <button
         mat-raised-button
-        (click)="approveItem(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished)"
+        (click)="approveItem(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished, newDate, newVenue)"
         class="submit"
         *ngIf="router.url.includes('approval') && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
         <span>Approve</span>
@@ -59,7 +71,7 @@
 
     <button
         mat-raised-button
-        (click)="submitForModeration(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished)"
+        (click)="submitForModeration(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished, newDate, newVenue)"
         class="submit"
         *ngIf="router.url.includes('approval') && entityObject && ((currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin') || currentAdmin.uid === entityObject.updatedBy)">
         Save Draft
@@ -75,7 +87,7 @@
 
     <button
         mat-raised-button
-        (click)="submitForModeration(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished)"
+        (click)="submitForModeration(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished, newDate, newVenue)"
         class="submit"
         *ngIf="!router.url.includes('approval')">
         <span>Submit for Moderation</span>
@@ -83,11 +95,16 @@
 
     <button
         mat-raised-button
-        (click)="addProduct(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished, false)"
+        (click)="addProduct(newTitle, newPrice, newCategory, newWeight, newDescription, newPublished, newDate, newTime, newVenue)"
         class="submit"
         *ngIf="!router.url.includes('approval') && (currentAdmin.role === 'super-admin' || currentAdmin.role === 'admin')">
         <span *ngIf="!editMode">Add</span>
         <span *ngIf="editMode">Save</span>
         Product
     </button>
+    <div *ngIf="productKey; else productNotAvailable">
+    <seat-selection [seats]="refSeats" [productKey]="productKey" (selectedSeat)="onSelectedSeat($event)"></seat-selection>
+    </div>
+    <ng-template #productNotAvailable>Produkt ist noch nicht verfügbar.</ng-template>
+
 </div>

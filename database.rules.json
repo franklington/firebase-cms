@@ -59,6 +59,14 @@
         ".read": "data.child('published').val() == true || root.child('admins/'+auth.uid).exists()"
       }
     },
+    "seats": {
+      ".read": true,
+      ".write": "root.child('admins/'+auth.uid).exists() && root.child('admins/'+auth.uid).child('role').val().matches(/(admin)/)",
+      ".indexOn": ["product"],
+      "$p_id": {
+        ".read": "data.child('published').val() == true || root.child('admins/'+auth.uid).exists()"
+      }
+    },
     "posts": {
       ".read": true,
       ".write": "root.child('admins/'+auth.uid).exists() && root.child('admins/'+auth.uid).child('role').val().matches(/(admin)/)",

@@ -6,8 +6,8 @@
     <p *ngIf="(products | async)?.length === 0" class="center">
         No products yet
     </p>
-    <mat-card class="product" *ngFor="let product of products | async" routerLink="/admin/edit-product/{{ product.key }}">
-        <div class="content">
+    <mat-card class="product" *ngFor="let product of products | async">
+        <div class="content" routerLink="/admin/edit-product/{{ product.key }}">
             <h3><a routerLink="/product/{{product.payload.val().url}}" target="_blank" stop-propagation>{{product.payload.val().title}}</a></h3>
             <div class="date">{{product.payload.val().price | currency:'USD':true }}</div>
         </div>

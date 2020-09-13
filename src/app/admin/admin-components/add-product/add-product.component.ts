@@ -10,6 +10,7 @@ import * as firebase from 'firebase/app';
 import { FirebaseApp } from 'angularfire2';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
+
 @Component({
   selector: 'add-product',
   templateUrl: './add-product.component.html',
@@ -18,6 +19,7 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 export class AddProductComponent implements OnInit {
 
   products: AngularFireList<any>;
+  seats: AngularFireList<any>;
   categories: Observable<any>;
   ogCategory: string;
   newTitle: string;
@@ -27,6 +29,10 @@ export class AddProductComponent implements OnInit {
   newPublished: boolean;
   newCategory: any;
   newWeight: number;
+  newDate:string;
+  newVenue:any;
+  newSeats:any;
+  refSeats:AngularFireList<any>;
   currentAdmin: any;
   editMode: boolean;
   productKey: string;
@@ -52,6 +58,7 @@ export class AddProductComponent implements OnInit {
   ) {
     this.newPublished = false;
     this.products = db.list('/products');
+    this.seats = db.list('/seats');
     this.categories = db.list('/categories').snapshotChanges();
 
     this.globalService.admin.subscribe(admin => {
@@ -106,12 +113,19 @@ export class AddProductComponent implements OnInit {
             this.newPublished = p.published;
             this.newCategory = p.category;
             this.newWeight = p.weight;
+            this.newDate= p.date;
+            this.newVenue = p.venue;
+            this.newSeats = p.seats;
 
             if (p.thumbnail) {
               this.imageUrl = p.thumbnail;
               this.newThumbnail = p.thumbnail;
             }
           });
+
+          //lookingup reserved Seats
+
+
         } else {
           this.newTitle = null;
           this.newThumbnail = null;
@@ -120,7 +134,12 @@ export class AddProductComponent implements OnInit {
           this.newCategory = null;
           this.newWeight = 0;
           this.newPublished = false;
+          this.newDate= Date.now().toString();
+          this.newVenue = null;
+          this.newSeats = null;
         }
+
+
     });
   }
 
@@ -194,7 +213,7 @@ export class AddProductComponent implements OnInit {
     }
   }
 
-  addProduct(newTitle: string, newPrice: string, newCategory: any, newWeight: number, newDescription: string, newPublished: boolean) {
+  addProduct(newTitle: string, newPrice: string, newCategory: any, newWeight: number, newDescription: string, newPublished: boolean, newDate:string, newVenue:any) {
     if (!newPublished) {
       newPublished = false;
     }
@@ -213,7 +232,10 @@ export class AddProductComponent implements OnInit {
         updatedBy: this.currentAdmin.uid,
         weight: newWeight,
         category: newCategory ? newCategory : null,
-        entityKey: this.editMode && this.productKey ? this.productKey : null
+        entityKey: this.editMode && this.productKey ? this.productKey : null,
+        date:newDate,
+        venue:newVenue ? newVenue : null,
+
       };
 
       // if (this.imageUrl && !this.newThumbnail) {
@@ -226,12 +248,18 @@ export class AddProductComponent implements OnInit {
         this.updateCategory(this.ogCategory, this.newCategory, this.productKey);
       } else {
         this.products.push(productObject).then((item) => {
+          this.productKey = item.key;
+          console.log("saved productKey");
+
+
           if (this.newCategory) {
             this.db.object('/products/' + item.key + '/entityKey').set(item.key);
             this.db.object('/categories/' + this.newCategory + '/products/' + item.key).set(Date.now().toString());
           }
         });
       }
+
+
 
       let snackBarRef = this.snackBar.open('Product saved', 'OK!', {
         duration: 3000
@@ -241,7 +269,7 @@ export class AddProductComponent implements OnInit {
     this.validateFields(newTitle, newDescription, newPrice);
   }
 
-  submitForModeration(newTitle: string, newPrice: string, newCategory: any, newWeight: number, newDescription: string, newPublished: boolean) {
+  submitForModeration(newTitle: string, newPrice: string, newCategory: any, newWeight: number, newDescription: string, newPublished: boolean, newDate:string, newVenue:any) {
     if (!newPublished) {
       newPublished = false;
     }
@@ -260,7 +288,9 @@ export class AddProductComponent implements OnInit {
         published: newPublished,
         weight: newWeight,
         updatedBy: this.currentAdmin.uid,
-        category: newCategory ? newCategory : null
+        category: newCategory ? newCategory : null,
+        date:newDate,
+        venue:newVenue ? newVenue : null,
       };
 
       if (this.editMode && this.productKey) {
@@ -300,8 +330,7 @@ export class AddProductComponent implements OnInit {
 
     this.validateFields(newTitle, newDescription, newPrice);
   }
-
-  approveItem(newTitle: string, newPrice: string, newCategory: any, newDescription: string, newPublished: boolean) {
+  approveItem(newTitle: string, newPrice: string, newCategory: any, newWeight: number, newDescription: string, newPublished: boolean, newDate:string, newVenue:any) {
     if (this.entityObject.entityKey) {
       let ogEntity = this.db.object('/products/' + this.entityObject.entityKey);
       ogEntity.valueChanges().pipe(take(1)).subscribe((item:any) => {
@@ -336,5 +365,14 @@ export class AddProductComponent implements OnInit {
         this.router.navigateByUrl('admin/products')
       }
     });
+  }
+  onSelectedSeat(selectedSeat: any){
+      //Save To Product if it exists
+
+
+
+
+
+
   }
 }

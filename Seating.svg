@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 400 800" style="enable-background:new 0 0 400 800;" xml:space="preserve">
+<style type="text/css">
+
+	.Seat{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
+</style>
+
+<rect x="31.2" y="43.7" class="Seat" width="52.5" height="52.5" id="S1R1S1"/>
+<rect x="173.8" y="43.7" class="Seat" width="52.5" height="52.5"id="S1R1S2"/>
+<rect x="173.8" y="43.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 400 139.8333)" class="Seat" width="52.5" height="52.5" id="S1R1S3"/>
+<rect x="102.5" y="43.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 257.4167 139.8333)" class="Seat" width="52.5" height="52.5" id="S1R1S4"/>
+<rect x="245" y="43.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 542.5833 139.8333)" class="Seat" width="52.5" height="52.5" id="S1R1S5"/>
+<rect x="245" y="43.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 542.5833 139.8333)" class="Seat" width="52.5" height="52.5" id="S1R1S6"/>
+<rect x="316" y="43.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 684.5833 139.8333)" class="Seat" width="52.5" height="52.5" id="S1R1S7"/>
+</svg>

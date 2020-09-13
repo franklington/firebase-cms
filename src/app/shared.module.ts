@@ -5,6 +5,8 @@ import { MaterialComponentsModule } from 'app/materialcomponents.module';
 
 // Components
 import { OrderComponent } from 'app/storefront-components/order/order.component';
+import { SeatSelectionComponent } from 'app/storefront-components/seat-selection/seat-selection.component';
+
 
 // Pipes
 import { SortPipe } from 'app/pipes/sort.pipe';
@@ -29,15 +31,19 @@ const pipes = [
   imports: [
     CommonModule,
     RouterModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+
   ],
   declarations: [
     ...pipes,
-    OrderComponent
+    OrderComponent,
+    SeatSelectionComponent,
+
   ],
   exports: [
     ...pipes,
-    RouterModule
+    RouterModule,
+    SeatSelectionComponent
   ]
 })
 export class SharedModule { }
